@@ -26,7 +26,7 @@ cur = con.cursor()
 result=cur.execute("select name , phone from customers")
 ```
 
-Then I created a list to store the (name, number) tuples. To make the process easier, at this point I made the names all lowercase with ‘.lower’. I also removed the ‘-’ from the phone number.
+Then I created a list to store the `(name, number)` tuples. To make the process easier, at this point I made the names all lowercase with `.lower`. I also removed the ‘-’ from the phone number.
 
 ``` python
 outcome=[]
@@ -69,7 +69,7 @@ def numberize(name):
     return numbername
 ```
 
-Once I had my numberizing function, it was time to pass that over my (name, number) tuples and find a match 
+Once I had my numberizing function, it was time to pass that over my `(name, number)` tuples and find a match 
 
 ```python
 for entry in outcome:
@@ -85,7 +85,8 @@ I ran this part and got a number!
 
 Uh oh, it’s longer than 10 digits (13, to be exact). Rereading the prompt, I realized it didn’t specify if the numberized name would be the full name, or just the first or last name. I decided to try the last 10 digits, assuming it would be the last name… nothing. I then tried again, reinserting the dashes from the original table. That worked and I officially passed Night 1!
 
-Post script: In writing this recap, I also realized I could have just written a query in SQL to check the person’s name. I did that to verify that the name did appear in the customer table and that the customer’s first name was 3 letters.
+#### Upgrading my query
+ In writing this recap, I also realized I could have just written a query in SQL to check the person’s name. I did that to verify that the name did appear in the customer table and that the customer’s first name was 3 letters.
 
 ``` sql
 select name from customers where phone="826-636-2286"
@@ -143,7 +144,10 @@ as table2
 ON table1.orderid = table2.orderid;
 ```
 
-This query returned 1 phone number, which was the correct answer to Night 2. I’m writing this recap after finishing all 8 nights, and I’m cringing a little about how inefficient this query is. Still, this was the first time I had joined several tables so it was a good learning experience that I was able to improve upon as the puzzles continued. 
+This query returned 1 phone number, which was the correct answer to Night 2. 
+
+#### Upgrading my query
+I’m writing this recap after finishing all 8 nights, and I’m cringing a little about how inefficient this query is. Still, this was the first time I had joined several tables so it was a good learning experience that I was able to improve upon as the puzzles continued. 
 
 Now that I feel more comfortable with SQL, I would join orders to orders_items then customers to orders and then pull the phone number directly. This would be more efficient than creating 2 tables then combining them. Here’s how I would write it:
 
@@ -203,6 +207,8 @@ ON table1.orderid = table2.orderid
 where strftime ('%H-%M', ordered) between '03:00' and '04:59'
 and sku like 'BKY%';
 ```
+
+#### Upgrading my query
 Again, cringing at this long query to combine three tables that I could rewrite as such:
 
 ```sql
