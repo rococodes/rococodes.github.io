@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hanukkah of Data - Nights 1-4"
-date:   2024-05-01
+date:   2024-05-06
 categories: 
 ---
 Welcome to my first blog post. I am splitting my adventures with the [Hanukkah of Data game](https://hanukkah.bluebird.sh/5784/) into 2 posts. Read on for my approach to learning SQL through a game rather than a curriculum-based approach.
