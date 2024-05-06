@@ -120,9 +120,9 @@ select * from products where desc like "%coffee%";
 select * from products where desc like "%bagel%";
 ```
 
-There was only 1 row in the product table for coffee so I decided to use the sku for that item in my big query. I was also hesitant to use bagel since there could have been other products that were bagel sandwiches or otherwise labeled differently.
+There was only 1 row in the product table for coffee so I decided to use the `sku` for that item in my big query. I was also hesitant to use bagel since there could have been other products that were bagel sandwiches or otherwise labeled differently.
 
-Now I had 3 tables I had to join- orders, customers, orders_items. My approach was to have 2 tables: the one I already pulled from my first query (joining date and name) and a second table with order ID and customer ID (where the order contained the coffee sku). I then joined those 2 tables together and pulled the phone number of the person with initials JP, who ordered in 2017, and bought coffee.
+Now I had 3 tables I had to join- `orders, customers, orders_items`. My approach was to have 2 tables: the one I already pulled from my first query (joining date and name) and a second table with order ID and customer ID (where the order contained the coffee `sku`). I then joined those 2 tables together and pulled the phone number of the person with initials JP, who ordered in 2017, and bought coffee.
 
 ``` sql
 select phone
@@ -149,7 +149,7 @@ This query returned 1 phone number, which was the correct answer to Night 2.
 #### Upgrading my query
 I’m writing this recap after finishing all 8 nights, and I’m cringing a little about how inefficient this query is. Still, this was the first time I had joined several tables so it was a good learning experience that I was able to improve upon as the puzzles continued. 
 
-Now that I feel more comfortable with SQL, I would join orders to orders_items then customers to orders and then pull the phone number directly. This would be more efficient than creating 2 tables then combining them. Here’s how I would write it:
+Now that I feel more comfortable with SQL, I would join `orders` to `orders_items` then `customers` to `orders` and then pull the phone number directly. This would be more efficient than creating 2 tables then combining them. Here’s how I would write it:
 
 ```sql
 select phone
@@ -186,7 +186,7 @@ Even though I didn't need to do any joins for this puzzle, I was able to learn m
 
 ### Night 4
 
-This puzzle had a fairly vague prompt, only specifying that the person bought pastries before 5am. I did some research in the product table and saw that I could use the sku BKY for bakery items.
+This puzzle had a fairly vague prompt, only specifying that the person bought pastries before 5am. I did some research in the product table and saw that I could use the `sku like 'BKY%'` for bakery items.
 
 ```sql
 select phone, ordered
