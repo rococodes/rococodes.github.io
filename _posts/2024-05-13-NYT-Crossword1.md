@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Visualizing Crossword Data"
-date:   2024-05-12
+date:   2024-05-13
 categories: 
 ---
 
@@ -15,9 +15,9 @@ Before I get into the code, I'll explain some background on crossword puzzles. L
 
 Since this was my first time working with an API I wanted to devote a blog post just to that topic. In future posts, I'll focus on working with the data I pulled.
 
-This project was an interesting introduction because I had to make two different API calls, one for public data and one for data that required an authentication token. Here I will shout out [this GitHub project](https://github.com/kesyog/crossword/tree/main) from kesyog which helped me a lot. Their program does not use Python for the API call so I was partially on my own. I decided to work on this project in a Jupyter Notebook since I like the format for viewing data and I'll want to plot my results at some point.
+This project was an interesting introduction because I had to make two different API calls. Here I will shout out [this GitHub project](https://github.com/kesyog/crossword/tree/main) from kesyog which helped me a lot. Their program does not use Python for the API call so I was partially on my own. I decided to work on this project in a Jupyter Notebook since I like the format for viewing data and I'll want to plot my results at some point.
 
-#### API Call 1 - public crossword data
+#### API Call 1 - general crossword data
 
 The first API call gets information on each daily crossword. This is a pretty straightforward section of code that you can see below. I'm using the Python `requests` module and the URL from kesyog's code. The one wrinkle to keep in mind is that the NYT site will only let you pull 100 days of crosswords with each call. I'm going to figure out how to deal with that later since I'm eventually going to want several years of data. For now, I just want to make sure that I can get the data I need.
 
@@ -45,7 +45,7 @@ print(f"Repositories returned: {len(repo_dicts)}")
 
 repo_dict = repo_dicts[0]
 print(f"\nKeys: {len(repo_dict)}")
-for key in sorted(repo_dict.keys()):
+for key in repo_dict.keys():
     print(key)
 
 print(repo_dicts[0])
@@ -59,30 +59,37 @@ Keys: 11
 author
 editor
 format_type
-percent_filled
 print_date
 publish_type
 puzzle_id
-solved
-star
 title
 version
+percent_filled
+solved
+star
 
  {
-    "author": "Harry Zheng",
-    "editor": "Will Shortz",
-    "format_type": "Normal",
-    "print_date": "2024-01-01",
-    "publish_type": "Daily",
-    "puzzle_id": 21588,
-    "title": "",
-    "version": 0,
-    "percent_filled": 0,
-    "solved": false,
-    "star": null
+"author": "Harry Zheng",
+"editor": "Will Shortz",
+"format_type": "Normal",
+"print_date": "2024-01-01",
+"publish_type": "Daily",
+"puzzle_id": 21588,
+"title": "",
+"version": 0,
+"percent_filled": 0,
+"solved": false,
+"star": null
         }
 ```
-This all looks pretty good. ```puzzle_id``` and ```print_date``` will definitely come in handy later. Now time to get my crossword data.
+The first several entries look good, but the last 3 (```percent_filled, solved, star```) have no data. This shows the limitations of using the public API call. I reran the API call, adding  my NYT token (see how below), to get my streak data.
+```
+"percent_filled": 100,
+"solved": True,
+"star": 'Gold'
+```
+
+ These fields, as well as ```puzzle_id``` and ```print_date``` will definitely come in handy later. Now time to get more of my crossword data.
 
 
 #### API Call 2- My results
@@ -101,7 +108,7 @@ print(crossresponse_dict)
 dict_keys(['board', 'calcs', 'firsts', 'lastCommitID', 'puzzleID', 'timestamp', 'userID', 'minGuessTime', 'lastSolve'])
 ```
 
-The only new item in this call is the ```cookies``` line, which is how you access your personal crossword data. Also note that you have to enter the puzzle ID in order to get the solve information. I printed the entire result since I didn't know the format of the data beyond the keys. ```board``` is a record of every single letter guess entered into the grid so I'll skip printing that. The other results are below:
+The only new item in this call is the ```cookies``` line, which is how you access your personal crossword data. Also note that you have to enter the puzzle ID in order to get the solve information. I printed the entire result since I didn't know the format of the data beyond the keys. ```board``` is a record of every single letter guess entered into the grid so I'll skip printing that. The other results are below and show my stats for the 01/01/2024 puzzle:
 
 ```
 'calcs': {
