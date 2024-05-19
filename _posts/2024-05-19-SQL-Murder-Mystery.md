@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "SQL Murder Mystery"
-date:   2024-05-13
+date:   2024-05-19
 categories: 
 ---
 As a palate cleanser to my Python activities, I want to continue exploring the world of SQL games. A classic in the genre is [the SQL Murder Mystery](https://mystery.knightlab.com/). I have enjoyed using SQL games to improve my skills and recommend them to anyone learning the language. Playing a game really helps me get a feel for working with different data structures and requests. I also like how it requires some creative thought to interpret clues outside of simply writing queries.
