@@ -61,10 +61,10 @@ select name, address_strees_name, transcript from person
 join interview on person.id = interview.person_id
 where address_street_name like "Franklin Ave" and name like "Annabel%";
 ```
+
 | name      | address_street_name  | transcript |
 | ----------- | ----------- | ---|
 | Annabel Miller      | Franklin Ave       | I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th. |
-
 
 ```sql
 select person.name, transcript from person
